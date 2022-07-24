@@ -1,6 +1,5 @@
 package com.spring.freezer.services;
 
-import java.lang.reflect.Method;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -12,8 +11,6 @@ import com.spring.freezer.repositories.FoodRepository;
 import com.spring.freezer.requestmodels.FoodAddRequestModel;
 import com.spring.freezer.responsemodels.FoodIDResponseModel;
 import com.spring.freezer.responsemodels.FoodResponseModel;
-
-import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
 
 @Service
 public class FoodService {
