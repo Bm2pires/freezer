@@ -13,6 +13,8 @@ import com.spring.freezer.requestmodels.FoodAddRequestModel;
 import com.spring.freezer.responsemodels.FoodIDResponseModel;
 import com.spring.freezer.responsemodels.FoodResponseModel;
 
+import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
+
 @Service
 public class FoodService {
 
@@ -37,7 +39,37 @@ public class FoodService {
         Optional<Food> food = foodRepo.findById(id);
         if (food.isPresent()) {
             FoodResponseModel response = mapper.map(food.get(), FoodResponseModel.class);
-            System.out.println(response);
+            return response;
+        } else {
+            return null;
+        }
+    }
+
+    // update a food item method
+    public FoodResponseModel updateItem(FoodAddRequestModel request) {
+        ModelMapper mapper = new ModelMapper();
+        // check if there is an existing food object in the db
+        Optional<Food> food = foodRepo.findById(request.getId());
+        if (food.isPresent()) {
+            // map the request onto a food class, this will not have an id field filled in
+            Food updateFood = mapper.map(request, Food.class);
+            // set the id of the update food to the object that we found
+            updateFood.setId(food.get().getId());
+            foodRepo.save(updateFood);
+            FoodResponseModel response = mapper.map(updateFood, FoodResponseModel.class);
+            return response;
+        } else {
+            return null;
+        }
+    }
+
+    // find by name method
+    public FoodResponseModel findByName(String name) {
+        ModelMapper mapper = new ModelMapper();
+
+        Optional<Food> food = foodRepo.findByName(name);
+        if (food.isPresent()) {
+            FoodResponseModel response = mapper.map(food.get(), FoodResponseModel.class);
             return response;
         } else {
             return null;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.freezer.requestmodels.FoodAddRequestModel;
@@ -37,16 +38,18 @@ public class FoodController {
     public ResponseEntity<FoodResponseModel> getDetails(@PathVariable int id) {
         FoodResponseModel response = foodService.findById(id);
         return new ResponseEntity<FoodResponseModel>(response, HttpStatus.OK);
-
     }
 
+    // method to update/edit an item
     @PutMapping(value = "/update", produces = "application/json", consumes = "application/json")
-    public void updateItem() {
-
+    public ResponseEntity<FoodResponseModel> updateItem(@RequestBody FoodAddRequestModel request) {
+        FoodResponseModel response = foodService.updateItem(request);
+        return new ResponseEntity<FoodResponseModel>(response, HttpStatus.OK);
     }
 
     @GetMapping(value = "/search", produces = "application/json")
-    public void searchFood() {
-
+    public ResponseEntity<FoodResponseModel> searchFood(@RequestParam String name) {
+        FoodResponseModel response = foodService.findByName(name);
+        return new ResponseEntity<FoodResponseModel>(response, HttpStatus.OK);
     }
 }
