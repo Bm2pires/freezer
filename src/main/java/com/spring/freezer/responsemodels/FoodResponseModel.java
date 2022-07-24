@@ -3,9 +3,7 @@ package com.spring.freezer.responsemodels;
 import lombok.Data;
 
 @Data
-public class FoodAddResponseModel {
-
-    private long id;
+public class FoodResponseModel {
 
     private String name;
 

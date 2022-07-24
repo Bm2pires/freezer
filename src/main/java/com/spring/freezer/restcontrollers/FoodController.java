@@ -1,9 +1,11 @@
 package com.spring.freezer.restcontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.freezer.requestmodels.FoodAddRequestModel;
-import com.spring.freezer.responsemodels.FoodAddResponseModel;
+import com.spring.freezer.responsemodels.FoodIDResponseModel;
+import com.spring.freezer.responsemodels.FoodResponseModel;
 import com.spring.freezer.services.FoodService;
 
 @RestController
@@ -22,14 +25,18 @@ public class FoodController {
     @Autowired
     FoodService foodService;
 
+    // method to add food to fridge
     @PostMapping(value = "/add", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<FoodAddResponseModel> addFood(@RequestBody FoodAddRequestModel request) {
-        FoodAddResponseModel response = foodService.add
-        return void;
+    public ResponseEntity<FoodIDResponseModel> addFood(@RequestBody FoodAddRequestModel request) {
+        FoodIDResponseModel response = foodService.addFood(request);
+        return new ResponseEntity<FoodIDResponseModel>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get", produces = "application/json")
-    public void getDetails() {
+    // method to provide an id through the url and get the detail of the food
+    @GetMapping(value = "/get/{id}", produces = "application/json")
+    public ResponseEntity<FoodResponseModel> getDetails(@PathVariable int id) {
+        FoodResponseModel response = foodService.findById(id);
+        return new ResponseEntity<FoodResponseModel>(response, HttpStatus.OK);
 
     }
 
