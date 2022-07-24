@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
+// class containing food entity
 @Entity
 @Data
 public class Food {

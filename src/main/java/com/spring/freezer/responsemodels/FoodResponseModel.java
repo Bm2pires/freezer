@@ -2,6 +2,7 @@ package com.spring.freezer.responsemodels;
 
 import lombok.Data;
 
+// food response model
 @Data
 public class FoodResponseModel {
 

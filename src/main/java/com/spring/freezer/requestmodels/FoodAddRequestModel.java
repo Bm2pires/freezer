@@ -2,6 +2,7 @@ package com.spring.freezer.requestmodels;
 
 import lombok.Data;
 
+// request entity model
 @Data
 public class FoodAddRequestModel {
 

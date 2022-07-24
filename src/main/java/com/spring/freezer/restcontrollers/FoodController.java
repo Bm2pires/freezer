@@ -18,6 +18,7 @@ import com.spring.freezer.responsemodels.FoodIDResponseModel;
 import com.spring.freezer.responsemodels.FoodResponseModel;
 import com.spring.freezer.services.FoodService;
 
+// rest controller layer to set up API endpoints
 @RestController
 @RequestMapping("/food")
 @CrossOrigin
@@ -47,6 +48,7 @@ public class FoodController {
         return new ResponseEntity<FoodResponseModel>(response, HttpStatus.OK);
     }
 
+    // method to search for food item by name
     @GetMapping(value = "/search", produces = "application/json")
     public ResponseEntity<FoodResponseModel> searchFood(@RequestParam String name) {
         FoodResponseModel response = foodService.findByName(name);

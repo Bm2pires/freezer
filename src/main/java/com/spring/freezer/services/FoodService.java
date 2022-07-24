@@ -12,6 +12,7 @@ import com.spring.freezer.requestmodels.FoodAddRequestModel;
 import com.spring.freezer.responsemodels.FoodIDResponseModel;
 import com.spring.freezer.responsemodels.FoodResponseModel;
 
+// service layer to inject functionality into controller layer 
 @Service
 public class FoodService {
 
